@@ -6,11 +6,20 @@
        yum_repository:
          name: cassandra
          description: cassandra 
-         baseurl: https://www.apache.org/dist/cassandra/redhat/311x/
+         baseurl: http://rpm.datastax.com/datastax-ddc/3.9
          gpgcheck: no
          enabled: yes
      - name: install the latest version of cassandra
        yum:
-          name: cassandra
+          name: datastax-ddc
           state: latest
-         
+     - name: Stoping service cassandra, if not started
+       service:
+          name: cassandra
+          state: stopped
+     - name: install the openjdk devel 1.8.x
+       yum:
+          name: java-1.8.0-openjdk-devel
+          state: latest
+     - name: Delete cassandra views
+       shell: rm -rf /var/lib/cassandra/data/system/* && rm -rf /var/lib/cassandra/data/data/system/*
