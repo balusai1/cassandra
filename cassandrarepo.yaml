@@ -1,0 +1,10 @@
+- hosts: all
+  user: root
+  sudo: true
+  tasks:
+     - name: Downloading ropo file
+       yum_repository:
+         name: cloudera-cdh
+         description: Cloudera cdh 5 YUM repo
+         baseurl: https://archive.cloudera.com/cdh5/redhat/7/x86_64/cdh/5.15.1
+      
